@@ -10,6 +10,8 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -65,10 +67,52 @@ public class InMemoryPersistenceTest {
         catch (BlueprintPersistenceException ex){
             
         }
-                
-        
+    }
+
+    @Test
+    public void getBlueprintsByAuthor() throws BlueprintNotFoundException {
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp1=new Blueprint("john", "thepaint",pts);
+        Blueprint bp2=new Blueprint("john", "Fire",pts);
+        Blueprint bp3=new Blueprint("john", "The Haunting of Hill House",pts);
+        Blueprint bp4=new Blueprint("Edgar Allan Poe", "The Haunting of Hill House",pts);
+
+        try {
+            ibpp.saveBlueprint(bp1);
+            ibpp.saveBlueprint(bp2);
+            ibpp.saveBlueprint(bp3);
+            ibpp.saveBlueprint(bp4);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the first blueprint.");
+        }
+
+        Set<Blueprint> author1Blueprints1 = ibpp.getBlueprintsByAuthor("john");
+        Set<Blueprint> author1Blueprints2 = ibpp.getBlueprintsByAuthor("Edgar Allan Poe");
+
+        assertEquals(3, author1Blueprints1.size());
+
+        assertEquals(1, author1Blueprints2.size());
     }
 
 
-    
+    @Test
+    public void getBlueprintByAuthorAndName() throws BlueprintNotFoundException {
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp1=new Blueprint("Edgar Allan Poe", "House",pts);
+
+        try {
+            ibpp.saveBlueprint(bp1);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the first blueprint.");
+        }
+
+        Blueprint resultBlueprint = ibpp.getBlueprint("Edgar Allan Poe", "House");
+        assertNotNull(resultBlueprint);
+        assertEquals("Edgar Allan Poe", resultBlueprint.getAuthor());
+        assertEquals("House", resultBlueprint.getName());
+    }
 }
