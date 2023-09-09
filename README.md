@@ -2,6 +2,8 @@
 
 ## Arquitecturas de Software
 
+### Andrés Camilo Oñate Quimbayo
+
 # Componentes y conectores - Parte I.
 
 El ejercicio se debe traer terminado para el siguiente laboratorio (Parte II).
@@ -87,3 +89,10 @@ Al implementar todo lo requerido de las capas inferiores podemos ejecutar las pr
 	* (B) Filtrado de submuestreo: suprime 1 de cada 2 puntos del plano, de manera intercalada.
 
 6. Agrege las pruebas correspondientes a cada uno de estos filtros, y pruebe su funcionamiento en el programa de prueba, comprobando que sólo cambiando la posición de las anotaciones -sin cambiar nada más-, el programa retorne los planos filtrados de la manera (A) o de la manera (B). 
+
+Realizamos pruebas para verificar el comportamiento de los filtros:
+
+![image](https://github.com/AndresOnate/ARSW-LAB4/assets/63562181/f9442649-4894-4bd4-b83f-382ae2abdf47)
+
+![image](https://github.com/AndresOnate/ARSW-LAB4/assets/63562181/4bb46e5d-0391-4bee-b707-9c4f89233a97)
+
