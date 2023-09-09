@@ -6,13 +6,15 @@ import edu.eci.arsw.blueprints.model.Point;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class SubsamplingFilter implements BlueprintFilter {
 
     @Override
-    public Blueprint filterBlueprint(Blueprint bp){
+    public Blueprint filterBlueprint(Blueprint bp) {
         List<Point> points = bp.getPoints();
         List<Point> filteredPoints = new ArrayList<>();
         filteredPoints.add(points.get(0));
@@ -21,8 +23,17 @@ public class SubsamplingFilter implements BlueprintFilter {
         }
         bp.setPoints(filteredPoints);
         return bp;
+    }
 
-}
+    @Override
+    public Set<Blueprint> filterBlueprints(Set<Blueprint> blueprints) {
+        Set<Blueprint> filteredBlueprints = new HashSet<>();
+        for (Blueprint bp : blueprints) {
+            Blueprint filteredBlueprint = filterBlueprint(bp);
+            filteredBlueprints.add(filteredBlueprint);
+        }
+        return filteredBlueprints;
+    }
 
 
 }

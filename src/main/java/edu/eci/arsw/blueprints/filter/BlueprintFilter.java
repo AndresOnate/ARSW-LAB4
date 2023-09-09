@@ -7,6 +7,8 @@ package edu.eci.arsw.blueprints.filter;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
 
+import java.util.Set;
+
 /**
  *
  * @author Andres Oñate
@@ -14,9 +16,16 @@ import edu.eci.arsw.blueprints.model.Blueprint;
 public interface BlueprintFilter {
 
     /**
+     * @param bp  Blueprint to filter
      * @return Filtered Blueprint
      */
     public Blueprint filterBlueprint(Blueprint bp);
+
+    /**
+     * @param blueprints The set of blueprints to filter
+     * @return A filtered set of blueprints
+     */
+    Set<Blueprint> filterBlueprints(Set<Blueprint> blueprints);
 
 
 }
