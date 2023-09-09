@@ -44,5 +44,44 @@ public class Main {
         } catch (BlueprintNotFoundException e) {
             System.out.println(e.getMessage());
         }
+
+
+        System.out.println("==== Consulta de planos con filtro ===");
+
+        Point pt1 = new Point(2, 2);
+        Point pt2 = new Point(3, 3);
+        Point pt3 = new Point(18, 18);
+        Point pt4 = new Point(5, 5);
+        Point pt5 = new Point(0, 0);
+
+
+        Blueprint bp4 = new Blueprint("john", "House Filter");
+        bp4.addPoint(pt1);
+        bp4.addPoint(pt2);
+        bp4.addPoint(pt3);
+        bp4.addPoint(pt4);
+        bp4.addPoint(pt5);
+
+        System.out.println("==== Agregar Plano ===");
+        try {
+            bps.addNewBlueprint(bp4);
+        } catch (BlueprintPersistenceException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("==== Consultando Plano Autor y Nombre ===");
+        try {
+            Blueprint resultBlueprint = bps.getBlueprint("john", "House Filter");
+            System.out.println(resultBlueprint);
+        }catch (BlueprintNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("==== Consultando Planos de Autor ===");
+        try {
+            System.out.println(bps.getBlueprintsByAuthor("john"));
+        } catch (BlueprintNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
